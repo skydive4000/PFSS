@@ -47,7 +47,7 @@ When disarming, the following stats are written to /LOGS/PFSS_Log.txt
 -----------
 
 First Row displays current flight mode and arming status (true/false).  
-If flight mode = STAB; ACRO; HOR or AIR the scipt suggests the status "armed".  
+If flight mode = STAB; ACRO; HOR or AIR the script suggests the status "armed".  
 If flight mode = !ERR*; 0; !FS; RTH; MANU; WAIT or anything else, the script suggests the status "disarmed".  
 
 ![Alt text](/PFSS.png?raw=true "ScreenshotBoxer")

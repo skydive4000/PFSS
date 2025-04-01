@@ -248,7 +248,7 @@ local function run(event)
 
     -- BLINK IF LOW SATS
 	if (tonumber(gpsSATS) < 6) then
-		lcd.drawText(25,29, "LESS THAN 6 SATS!", SMLSIZE + INVERS + BLINK)
+		lcd.drawText(60,23, "< 6 SATS!", SMLSIZE + INVERS + BLINK)
 	end
 		
 	-- BLINK IF NO TELEMETRY

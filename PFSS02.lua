@@ -42,8 +42,15 @@ local function calc_Distance(LatPos, LonPos, LatHome, LonHome)
 	return rnd(dist,5)
 end
 
+--- RETURN TRUE, IF FILE EXISTS
+function file_exists(name)
+   local f = io.open(name, "r")
+   return f ~= nil and io.close(f)
+end
+
+
 -- DECLARING VARIABLES
-local log_filename = "/LOGS/PFSS_Log.txt"
+local log_filename = "/LOGS/PFSS_Log.csv"
 local maxDistHome = 0
 local maxAltitude = 0
 local maxSpeed = 0
@@ -92,6 +99,13 @@ local function init()
 	if (gpsaltId == -1) then gpsaltId = getTelemetryId("GAlt") end
 	--if Stats can't be read, try to read Tmp2 (number of satellites SBUS/FRSKY)
 	if (gpssatId == -1) then gpssatId = getTelemetryId("Tmp2") end
+    -- WRITE HEADER, IF LOG FILE IS CREATED
+	if not file_exists(log_filename) then
+	    file = io.open(log_filename, "a")
+	    io.write(file, "DATE;TIME;DURATION;TRIP;MAXSPEED;MAXALTITUDE;MAXDISTHOME;MINBAT")
+        io.write(file, "\n")
+        io.close(file)
+	end
 end
 
 

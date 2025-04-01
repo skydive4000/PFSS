@@ -1,7 +1,8 @@
 --[[#############################################################################
 
 POST FLIGHT STATUS SCREEN (128x64 displays)
-Copyright (C) by olivre
+Copyright (C) by skydive4000  
+https://github.com/skydive4000/PFSS
 
 "POST FLIGHT STATUS SCREEN v0.2"
 

@@ -125,10 +125,11 @@ local function background()
 		    gpsLON_H = 0
 	        maxDistHome = 0
 	        maxAltitude = 0
-	        minAltitude = 0
+	        maxSpeed = 0
 	        StartAltitude = 0
 	        Timer = 0
 	        BatMinimum = 99
+	        DateTime = getDateTime()
 		    reset = true
             Arming = false
         end
@@ -163,7 +164,7 @@ local function background()
 	    if (type(gpsLatLon) == "table") then 			
 		    gpsLAT = rnd(gpsLatLon["lat"],6)
 		    gpsLON = rnd(gpsLatLon["lon"],6)		
-		    gpsSpeed = rnd(getValue(gpsspeedId), 1) -- speed is in knots or not? *1852/1000
+		    gpsSpeed = rnd(getValue(gpsspeedId), 1)
 		    gpsALT = rnd(getValue(gpsaltId),0)		
 		    
 		    if Armed then

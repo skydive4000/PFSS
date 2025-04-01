@@ -34,7 +34,7 @@ After arming**, it displays:
 
 -----------
 
-When disarming, the following stats are written to /LOGS/PFSS_Log.txt
+When disarming, the following stats are written to /LOGS/PFSS_Log.csv
 - Date;
 - Time;
 - Duration;

@@ -100,7 +100,7 @@ local function init()
 	--if Stats can't be read, try to read Tmp2 (number of satellites SBUS/FRSKY)
 	if (gpssatId == -1) then gpssatId = getTelemetryId("Tmp2") end
     -- WRITE HEADER, IF LOG FILE IS CREATED
-	if not file_exists(log_filename) then
+	if file_exists(log_filename)==false then
 	    file = io.open(log_filename, "a")
 	    io.write(file, "DATE;TIME;DURATION;TRIP;MAXSPEED;MAXALTITUDE;MAXDISTHOME;MINBAT")
         io.write(file, "\n")

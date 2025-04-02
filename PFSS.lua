@@ -9,6 +9,9 @@ https://github.com/skydive4000/PFSS
 Install:
 copy to /SCRIPTS/TELEMETRY
 
+To Do:
+Get RSSI from RemoteControl
+
 ################################################################################]]
 
 -- FUNCTIONS
@@ -53,11 +56,14 @@ end
 local log_filename = "/LOGS/PFSS_Log.csv"
 local maxDistHome = 0
 local maxAltitude = 0
+local maxAltitudeID = 0
 local maxSpeed = 0
+local maxSpeedID = 0
 local StartAltitude = 0
 local BatMinimum = 99
 local BatNow = 0
 local BatID = 0
+local minBatID = 0
 local FlightMode = 0
 local FlightModeID = 0
 local DateTime = getDateTime()
@@ -92,13 +98,22 @@ local function init()
 	gpsId = getTelemetryId("GPS")
 	gpssatId = getTelemetryId("Sats")
 	gpsspeedId = getTelemetryId("GSpd")
+	maxSpeedID = getTelemetryId("GSpd+")
 	BatID = getTelemetryId("RxBt") > -1 and getTelemetryId("RxBt") or getTelemetryId("BtRx")
+    minBatID = getTelemetryId("RxBt-") > -1 and getTelemetryId("RxBt-") or getTelemetryId("BtRx-")
 	FlightModeID = getTelemetryId("FM")
 	gpsaltId = getTelemetryId("Alt")
+	maxAltitudeID = getTelemetryId("Alt+")
 	--if "ALT" can't be read, try to read "GAlt"
-	if (gpsaltId == -1) then gpsaltId = getTelemetryId("GAlt") end
+	if (gpsaltId == -1) then 
+        gpsaltId = getTelemetryId("GAlt") 
+        maxAltitudeID = getTelemetryId("GAlt+") 
+    end
 	--if Stats can't be read, try to read Tmp2 (number of satellites SBUS/FRSKY)
-	if (gpssatId == -1) then gpssatId = getTelemetryId("Tmp2") end
+	if (gpssatId == -1) then 
+        gpssatId = getTelemetryId("Tmp2")
+        maxAltitudeID = getTelemetryId("Tmp2+")
+    end
     -- WRITE HEADER, IF LOG FILE IS CREATED
 	if file_exists(log_filename)==false then
 	    file = io.open(log_filename, "a")
@@ -144,13 +159,14 @@ local function background()
 	        Timer = 0
 	        BatMinimum = 99
 	        DateTime = getDateTime()
+	        local test = resetGlobalTimer()
 		    reset = true
             Arming = false
         end
     end
     if not (FlightMode == "AIR" or FlightMode == "STAB" or FlightMode == "ACRO" or FlightMode == "HOR") then
         if Armed then
-        -- Write Log File
+        -- WRITE DATA TO LOG FILE
             file = io.open(log_filename, "a")
             io.write(file, string.sub(100+DateTime["day"],2).."."..string.sub(100+DateTime["mon"],2).."."..string.sub(DateTime["year"],3))
             io.write(file, ";")
@@ -180,12 +196,11 @@ local function background()
 		    gpsLON = rnd(gpsLatLon["lon"],6)		
 		    gpsSpeed = rnd(getValue(gpsspeedId), 1)
 		    gpsALT = rnd(getValue(gpsaltId),0)		
-		    
+		    maxSpeed = rnd(getValue(maxSpeedID),0)
+            maxAltitude = rnd(getValue(maxAltitudeID),0)
+            BatMinimum = rnd(getValue(minBatID),2)
 		    if Armed then
      		   Timer = Timer + (Time - LastTime)
-		       if gpsALT > maxAltitude then maxAltitude = gpsALT end
-       		   if gpsSpeed > maxSpeed then maxSpeed = gpsSpeed end
-     		   if BatNow > 0 and BatNow < BatMinimum then BatMinimum = BatNow end
 		    end
 		    
 		    -- SET START POSITION
@@ -197,7 +212,7 @@ local function background()
 
 		    update = true	
 	    else
-	        -- NO TELEMETRY DATA
+	        -- NO TELEMETRY (GPS) DATA
 		    update = false
 	    end
 	
@@ -235,13 +250,13 @@ local function run(event)
 	lcd.drawFilledRectangle(1,0, 126, 8, GREY_DEFAULT)
 	lcd.drawText(60,1,FlightMode ,SMLSIZE + INVERS)
 	lcd.drawText(90,1,tostring(Armed) ,SMLSIZE + INVERS)
-    	lcd.drawText(2,9, "Sats:", SMLSIZE)	
+    lcd.drawText(2,9, "Sats:", SMLSIZE)	
 	lcd.drawText(30,9, gpsSATS, SMLSIZE)
 	lcd.drawText(60,9, "Armed:", SMLSIZE)
 	lcd.drawText(90,9, string.sub(100 + math.floor((Timer/100)/60),2)..":"..string.sub(100+math.floor(math.fmod((Timer/100),60)),2), SMLSIZE)
 	lcd.drawText(2,23, "Trip:", SMLSIZE)
 	lcd.drawText(30,23, gpsTotalDist, SMLSIZE)
-    	lcd.drawText(2,16, "Home:", SMLSIZE)
+    lcd.drawText(2,16, "Home:", SMLSIZE)
 	lcd.drawText(30,16, string.format("%.5f", gpsLAT_H) .. " / " .. string.format("%.5f", gpsLON_H), SMLSIZE)
 	lcd.drawText(2,30, "Speed:", SMLSIZE)
 	lcd.drawText(30,30, gpsSpeed,SMLSIZE)

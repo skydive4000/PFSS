@@ -53,6 +53,10 @@ end
 
 
 -- DECLARING VARIABLES
+
+local DistHome["current"] = 0
+local DistHome["max"] = 0
+
 local log_filename = "/LOGS/PFSS_Log.csv"
 local maxDistHome = 0
 local maxAltitude = 0

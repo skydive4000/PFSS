@@ -56,6 +56,7 @@ end
 local DistHome = {}
 local DistHome.current = 0
 local DistHome.max = 0
+local DistHome.total = 0
 
 local Speed = {}
 local Speed.current = 0
@@ -68,6 +69,8 @@ local Altitude.current = 0
 local Altitude.currentID = gpsaltId = getTelemetryId("Alt")
 local Altitude.max = 0
 local Altitude.maxID = gpsaltId = getTelemetryId("Alt+")
+local Altitude.home = 0
+-- IF "Alt" does not work, try GAlt or Tmp2
 
 local Battery = {}
 local Battery.current = 0
@@ -79,6 +82,14 @@ local Flightmode = {}
 local Flightmode.current = 0
 local Flightmode.currentID = getTelemetryId("FM")
 
+local Sats = {}
+local Sats.current = 0
+local Sats.currentID = getTelemetryId("Sats")
+
+local GPS = {}
+local GPS.ID = getTelemetryId("GPS")
+
+-- TO DO:  LINK QUALITY RECEIVER
 
 local log_filename = "/LOGS/PFSS_Log.csv"
 --local maxDistHome = 0 
@@ -86,7 +97,7 @@ local log_filename = "/LOGS/PFSS_Log.csv"
 --local maxAltitudeID = 0
 --local maxSpeed = 0
 --local maxSpeedID = 0
-local StartAltitude = 0
+-- local StartAltitude = 0
 --local BatMinimum = 99
 --local BatNow = 0
 --local BatID = 0
@@ -106,14 +117,14 @@ local gpsLAT_H = 0
 local gpsLON_H = 0
 local gpsPrevLAT = 0
 local gpsPrevLON = 0
-local gpsSATS = 0
-local gpsALT = 0
-local gpsSpeed = 0
-local gpssatId = 0
-local gpsspeedId = 0
-local gpsaltId = 0
-local gpsDtH = 0
-local gpsTotalDist = 0
+--local gpsSATS = 0
+--local gpsALT = 0
+--local gpsSpeed = 0
+--local gpssatId = 0
+--local gpsspeedId = 0
+--local gpsaltId = 0
+--local gpsDtH = 0
+--local gpsTotalDist = 0
 local update = true
 local reset = false
 local coordinates_prev = 0
@@ -122,25 +133,7 @@ local coordinates_current = 0
 
 -- INIT
 local function init()  				
-	gpsId = getTelemetryId("GPS")
-	gpssatId = getTelemetryId("Sats")
-	gpsspeedId = getTelemetryId("GSpd")
-	maxSpeedID = getTelemetryId("GSpd+")
-	BatID = getTelemetryId("RxBt") > -1 and getTelemetryId("RxBt") or getTelemetryId("BtRx")
-    minBatID = getTelemetryId("RxBt-") > -1 and getTelemetryId("RxBt-") or getTelemetryId("BtRx-")
-	FlightModeID = getTelemetryId("FM")
-	gpsaltId = getTelemetryId("Alt")
-	maxAltitudeID = getTelemetryId("Alt+")
-	--if "ALT" can't be read, try to read "GAlt"
-	if (gpsaltId == -1) then 
-        gpsaltId = getTelemetryId("GAlt") 
-        maxAltitudeID = getTelemetryId("GAlt+") 
-    end
-	--if Stats can't be read, try to read Tmp2 (number of satellites SBUS/FRSKY)
-	if (gpssatId == -1) then 
-        gpssatId = getTelemetryId("Tmp2")
-        maxAltitudeID = getTelemetryId("Tmp2+")
-    end
+
     -- WRITE HEADER, IF LOG FILE IS CREATED
 	if file_exists(log_filename)==false then
 	    file = io.open(log_filename, "a")

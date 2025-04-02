@@ -9,6 +9,9 @@ https://github.com/skydive4000/PFSS
 Install:
 copy to /SCRIPTS/TELEMETRY
 
+To Do:
+Get RSSI from RemoteControl
+
 ################################################################################]]
 
 -- FUNCTIONS

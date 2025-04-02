@@ -53,23 +53,46 @@ end
 
 
 -- DECLARING VARIABLES
+local DistHome = {}
+local DistHome.current = 0
+local DistHome.max = 0
 
-local DistHome["current"] = 0
-local DistHome["max"] = 0
+local Speed = {}
+local Speed.current = 0
+local Speed.currentID = getTelemetryId("GSpd")
+local Speed.max = 0
+local Speed.maxID = getTelemetryId("GSpd+")
+
+local Altitude = {}
+local Altitude.current = 0
+local Altitude.currentID = gpsaltId = getTelemetryId("Alt")
+local Altitude.max = 0
+local Altitude.maxID = gpsaltId = getTelemetryId("Alt+")
+
+local Battery = {}
+local Battery.current = 0
+local Battery.currentID = getTelemetryId("RxBt") > -1 and getTelemetryId("RxBt") or getTelemetryId("BtRx")
+local Battery.min = 99
+local Battery.minID = getTelemetryId("RxBt-") > -1 and getTelemetryId("RxBt-") or getTelemetryId("BtRx-")
+
+local Flightmode = {}
+local Flightmode.current = 0
+local Flightmode.currentID = getTelemetryId("FM")
+
 
 local log_filename = "/LOGS/PFSS_Log.csv"
-local maxDistHome = 0
-local maxAltitude = 0
-local maxAltitudeID = 0
-local maxSpeed = 0
-local maxSpeedID = 0
+--local maxDistHome = 0 
+--local maxAltitude = 0
+--local maxAltitudeID = 0
+--local maxSpeed = 0
+--local maxSpeedID = 0
 local StartAltitude = 0
-local BatMinimum = 99
-local BatNow = 0
-local BatID = 0
-local minBatID = 0
-local FlightMode = 0
-local FlightModeID = 0
+--local BatMinimum = 99
+--local BatNow = 0
+--local BatID = 0
+--local minBatID = 0
+--local FlightMode = 0
+--local FlightModeID = 0
 local DateTime = getDateTime()
 local Timer = 0
 local Time = 0

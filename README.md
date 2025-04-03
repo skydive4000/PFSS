@@ -8,7 +8,6 @@ Tested and made for Radiomaster Boxer / Pocket
 ## Description
 
 This LUA-Script collects telemetry data on your receiver.  
-Therefore telemetry IDs must be discovered in your model setup.
 
 After arming**, it displays:
 - Number of sattelites

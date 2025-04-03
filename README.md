@@ -65,11 +65,12 @@ See also:
 ### Installing
 
 * Copy script to /SCRIPTS/TELEMETRY
+* Go to Models screen 11/12 (TELEMETRY) and discover telemetry IDs.
+* Go to Models Screen 12/12 (DISPLAY)
+* Select Script and choose PFSS
 
 ### Executing program
 
-* Go to Models Screen 12/12 (DISPLAY)
-* Select Script and choose PFSS
 * From main screen press "TELE" button and +PAGE/-PAGE to get to the PFSS Screen
 * Thats it! 
 

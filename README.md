@@ -74,7 +74,8 @@ See also:
 ### Executing program
 
 * From main screen press "TELE" button and +PAGE/-PAGE to get to the PFSS Screen
-* Thats it! 
+* Thats it!
+* All of the max/min values are automatically reset on arming.
 
 ## Help
 

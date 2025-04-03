@@ -44,11 +44,16 @@ If flight mode = !ERR*; 0; !FS; RTH; MANU; WAIT or anything else, the script sug
 ### Dependencies
 
 All the max and min Values are calculated on your RC.
-Therefore you must ensure, that the update intervall for telemetry data is not too long.
+Therefore you must ensure, that the telemetry data is updated frequently.
+
 The update intervall relies on 3 sources:
 - ExpressLRS Packet Rate (Higher = better, but reduces range)
 - ExpressLRS Telem Ratio (Higher = better, but reduces packets send from RC to FC)
-- 
+- Disable not needed telemetry data via Betaflight
+
+See also:
+- https://www.expresslrs.org/info/telem-bandwidth/#
+- https://www.expresslrs.org/quick-start/pre-1stflight/#bench-test
 
 ### Installing
 

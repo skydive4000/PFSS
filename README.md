@@ -13,7 +13,7 @@ the post flight status screen displayed by the flight controller. ;)
 
 This LUA-Script collects telemetry data on your receiver.  
 
-After arming**, it displays:
+After arming**, the following Data is updated:
 - Date and time (at the time arming)
 - Arming status
 - Flight Mode

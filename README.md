@@ -5,25 +5,28 @@ Status Screen for EdgeTx Receivers
 Supports 128x64 monochrome displays  
 Tested and made for Radiomaster Boxer / Pocket  
 
+I wrot this script, because DJI O3 / O4 does not record
+the post flight status screen displayed by the flight controller. ;)
+(The record ends too soon)
+
 ## Description
 
 This LUA-Script collects telemetry data on your receiver.  
 
 After arming**, it displays:
-- Number of sattelites
+- Date and time (at the time arming)
+- Arming status
+- Flight Mode
+- Number of Sats
+- Status (NO TELEMETRY / LESS THAN 6 SATS)
 - Home coordinates (at the time arming)
 - Duration of flight (total time armed)
-- Trip distance (km)
-- Current speed / maximum speed (km/h)
-- Current altitude / maximum altitude (m)***
-- Current distance to home / maximum distance to home (km)
-- Current battery voltage / minimum battery voltage (v)
-- Current date and time
+- Maximum speed (km/h)
+- Maximum altitude above home (m)
+- Maximum distance to home (km)
+- Mnimum battery voltage (v)
 
-**To track data a minimum of 6 Sats is required.  
-***When disarmed, altitude above sea-level.  
-***Whem armed, altitude above home-coordinates.  
-***Maximum altitude is always above home-coordinates.
+**To track data a minimum of 6 Sats is required.   
 
 When disarming, the following stats are written to /LOGS/PFSS_Log.csv
 - Date;
@@ -34,7 +37,7 @@ When disarming, the following stats are written to /LOGS/PFSS_Log.csv
 - Maximum Altitude;
 - Maximum Distance to Home;
 - Minimum Battery Voltage;
-First Row displays current flight mode and arming status (true/false).  
+
 If flight mode = STAB; ACRO; HOR or AIR the script suggests the status "armed".  
 If flight mode = !ERR*; 0; !FS; RTH; MANU; WAIT or anything else, the script suggests the status "disarmed".  
 

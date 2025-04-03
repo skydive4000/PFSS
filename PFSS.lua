@@ -9,8 +9,6 @@ https://github.com/skydive4000/PFSS
 Install:
 copy to /SCRIPTS/TELEMETRY
 
-To Do:
-Get RSSI from RemoteControl
 
 ################################################################################]]
 
@@ -166,15 +164,10 @@ local function background()
 		-- UPDATE ARMING STATUS
 		if (Flightmode.current == "AIR" or Flightmode.current == "STAB" or Flightmode.current == "ACRO" or Flightmode.current == "HOR") and not Armed and not Arming then
 			Arming = true
-			-- local resetTimer = resetGlobalTimer()
 			ArmingTime = getTime()
-			--local resetAltitude = resetSensor(Altitude.maxID)
 		end
 
 		if Arming then
-			if getTime() - ArmingTime > 100 then
-				-- local resetTimer = resetGlobalTimer()
-				-- local resetAltitude = resetSensor(Altitude.maxID)
 				Armed = true
 				ArmingTime = 0
 				Timer = 0		
@@ -260,7 +253,6 @@ local function run(event)
 	lcd.drawLine(0,63,127,63, SOLID, FORCE)
 	lcd.drawText(27,1, string.sub(100+DateTime["day"],2).."."..string.sub(100+DateTime["mon"],2).."."..string.sub(DateTime["year"],3).." - "..string.sub(100+DateTime["hour"],2)..":"..string.sub(100+DateTime["min"],2), SMLSIZE)
 	lcd.drawFilledRectangle(1,0, 126, 8, GREY_DEFAULT)
-	
 	lcd.drawText(3,11, "Armed:", SMLSIZE)
 	lcd.drawText(32,11,tostring(Armed) ,SMLSIZE + INVERS)
 	lcd.drawText(3,19, "Mode: " ,SMLSIZE)

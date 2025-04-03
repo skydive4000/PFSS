@@ -1,4 +1,6 @@
-# PFSS(POST FLIGHT STATUS SCREEN)
+# PFSS
+POST FLIGHT STATUS SCREEN
+
 Status Screen for EdgeTx Receivers  
 Supports 128x64 monochrome displays  
 Tested and made for Radiomaster Boxer / Pocket  
@@ -50,6 +52,11 @@ The update intervall relies on 3 sources:
 - ExpressLRS Packet Rate (Higher = better, but reduces range)
 - ExpressLRS Telem Ratio (Higher = better, but reduces packets send from RC to FC)
 - Disable not needed telemetry data via Betaflight
+
+Example:
+With a Packet Pate of 100 Hz and a Telem Ratio of 1:16, the telem intervall is roughly 6 times per second.
+If you disable some of the not needed telem data, the GPS Position is updated about 3 times per second.
+The resulting values for TRIP/maxSpeed/maxAltitude/maxDistHome are nearly exactly the same as via the OSD Post Flight Stats.
 
 See also:
 - https://www.expresslrs.org/info/telem-bandwidth/#

@@ -47,8 +47,8 @@ If flight mode = !ERR*; 0; !FS; RTH; MANU; WAIT or anything else, the script sug
 
 ### Dependencies
 
-All the max and min Values are calculated on your RC.
-Therefore you must ensure, that the telemetry data is updated frequently.
+All the max and min Values are calculated on your RC. 
+Therefore you should ensure, that the telemetry data is updated frequently.
 
 The update intervall relies on 3 sources:
 - ExpressLRS Packet Rate (Higher = better, but reduces range)
@@ -56,12 +56,12 @@ The update intervall relies on 3 sources:
 - Disable not needed telemetry data via Betaflight
 
 Example:
-With a Packet Pate of 100 Hz and a Telem Ratio of 1:16, the telem intervall is roughly 6 times per second.
-If you disable some of the not needed telem data, the GPS Position is updated about 3 times per second.
+With a Packet Pate of 100 Hz and a Telem Ratio of 1:16, the telem intervall is roughly 6 times per second.  
+If you disable some of the not needed telem data, the GPS Position is updated about 3 times per second.  
 The resulting values for TRIP/maxSpeed/maxAltitude/maxDistHome are nearly exactly the same as via the OSD Post Flight Stats.
 
 See also:
-- https://www.expresslrs.org/info/telem-bandwidth/#
+- https://www.expresslrs.org/info/telem-bandwidth/#  
 - https://www.expresslrs.org/quick-start/pre-1stflight/#bench-test
 
 ### Installing

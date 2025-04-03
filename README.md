@@ -53,7 +53,7 @@ Therefore you should ensure, that the telemetry data is updated frequently.
 The update intervall relies on 3 sources:
 - ExpressLRS Packet Rate (Higher = better, but reduces range)
 - ExpressLRS Telem Ratio (Higher = better, but reduces packets send from RC to FC)
-- Disable not needed telemetry data via Betaflight
+- Disabling not needed telemetry data via Betaflight
 
 Example:
 With a Packet Pate of 100 Hz and a Telem Ratio of 1:16, the telem intervall is roughly 6 times per second.  

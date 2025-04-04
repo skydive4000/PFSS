@@ -5,7 +5,7 @@ Status Screen for EdgeTx Receivers
 Supports 128x64 monochrome displays  
 Tested and made for Radiomaster Boxer / Pocket  
 
-I wrot this script, because DJI O3 / O4 does not record  
+I wrote this script, because DJI O3 / O4 does not record  
 the post flight status screen displayed by the flight controller. ;)  
 (The record ends too soon)
 

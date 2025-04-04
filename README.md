@@ -57,7 +57,7 @@ The update intervall relies on 3 sources:
 - Disabling not needed telemetry data via Betaflight
 
 Example:
-With a Packet Pate of 100 Hz and a Telem Ratio of 1:16, the telem intervall is roughly 6 times per second.  
+With a Packet Rate of 100 Hz and a Telem Ratio of 1:16, the telem intervall is roughly 6 times per second.  
 If you disable some of the not needed telem data, the GPS Position is updated about 3 times per second.  
 The resulting values for TRIP/maxSpeed/maxAltitude/maxDistHome are nearly exactly the same as via the OSD Post Flight Stats.
 

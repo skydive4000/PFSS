@@ -98,3 +98,4 @@ https://github.com/skydive4000
 ## License
 
 No License.
+Feel free to use this script.

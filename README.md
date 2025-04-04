@@ -21,6 +21,7 @@ After arming**, the following Data is updated:
 - Status (NO TELEMETRY / LESS THAN 6 SATS)
 - Home coordinates (at the time arming)
 - Duration of flight (total time armed)
+- Distance travelled (Trip) (km)
 - Maximum speed (km/h)
 - Maximum altitude above home (m)
 - Maximum distance to home (km)

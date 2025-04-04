@@ -11,7 +11,7 @@ the post flight status screen displayed by the flight controller. ;)
 
 ## Description
 
-This LUA-Script collects telemetry data on your receiver.  
+This LUA-Script collects telemetry data and saves a summary on your receiver.  
 
 After arming**, the following Data is updated:
 - Date and time (at the time arming)

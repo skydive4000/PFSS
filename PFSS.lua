@@ -9,7 +9,6 @@ https://github.com/skydive4000/PFSS
 Install:
 copy to /SCRIPTS/TELEMETRY
 
-
 ################################################################################]]
 
 -- FUNCTIONS

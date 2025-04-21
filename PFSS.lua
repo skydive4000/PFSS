@@ -70,6 +70,8 @@ local Battery = {}
 	Battery.currentID = getTelemetryId("RxBt") > -1 and getTelemetryId("RxBt") or getTelemetryId("BtRx")
 	Battery.min = 99
 	Battery.minID = getTelemetryId("RxBt-") > -1 and getTelemetryId("RxBt-") or getTelemetryId("BtRx-")
+	Battery.arm = 99
+	Battery.disarm = 99
 local Flightmode = {}
 	Flightmode.current = 0
 	Flightmode.currentID = getTelemetryId("FM")
@@ -104,7 +106,7 @@ local function init()
     -- WRITE HEADER, IF LOG FILE IS CREATED
 	if file_exists(log_filename)==false then
 	    file = io.open(log_filename, "a")
-	    io.write(file, "DATE;TIME;DURATION;TRIP;MAXSPEED;MAXALTITUDE;MAXDISTHOME;MINBAT")
+	    io.write(file, "DATE;TIME;DURATION;TRIP;MAXSPEED;MAXALTITUDE;MAXDISTHOME;MINBAT;ARMBAT;DISARMBAT")
         io.write(file, "\n")
         io.close(file)
 	end
@@ -128,7 +130,10 @@ local function background()
 		Flightmode.current = getValue(Flightmode.currentID)
 		GPS.LatLon = getValue(GPS.ID)
 		Battery.current = getValue(Battery.currentID)
-		Battery.min = getValue(Battery.minID)
+		-- Battery.min = getValue(Battery.minID)
+		if Battery.min > Battery.current then
+			Battery.min = Battery.current
+		end
 		Sats.current = getValue(Sats.currentID)
 		--Speed.max = rnd(getValue(Speed.maxID),0)					
 		--Altitude.max = rnd(getValue(Altitude.maxID),0)
@@ -178,14 +183,16 @@ local function background()
 				GPS.LatHome = 0
 				GPS.LonHome = 0
 				Battery.min = 99
+				Battery.disarm = 99
+				Battery.arm = getValue(Battery.currentID)
 				DateTime = getDateTime()
 				reset = true
 				Arming = false
-			end
 		end
 		if not (Flightmode.current == "AIR" or Flightmode.current == "STAB" or Flightmode.current == "ACRO" or Flightmode.current == "HOR") then
 			if Armed then
 			-- WRITE DATA TO LOG FILE
+				Battery.disarm = getValue(Battery.currentID)
 				file = io.open(log_filename, "a")
 				io.write(file, string.sub(100+DateTime["day"],2).."."..string.sub(100+DateTime["mon"],2).."."..string.sub(DateTime["year"],3))
 				io.write(file, ";")
@@ -202,6 +209,10 @@ local function background()
 				io.write(file, DistHome.max)
 				io.write(file, ";")
 				io.write(file, Battery.min)
+				io.write(file, ";")
+				io.write(file, Battery.arm)
+				io.write(file, ";")
+				io.write(file, Battery.disarm)
 				io.write(file, "\n")
 				io.close(file)
 			end

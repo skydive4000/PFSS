@@ -38,6 +38,8 @@ When disarming, the following stats are written to /LOGS/PFSS_Log.csv
 - Maximum Altitude;
 - Maximum Distance to Home;
 - Minimum Battery Voltage;
+- Arming Battery Voltage;
+- Disarming Battery Volatage;
 
 If flight mode = STAB; ACRO; HOR or AIR the script suggests the status "armed".  
 If flight mode = !ERR*; 0; !FS; RTH; MANU; WAIT or anything else, the script suggests the status "disarmed".  
